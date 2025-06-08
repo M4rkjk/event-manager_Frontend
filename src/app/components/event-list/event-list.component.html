@@ -3,7 +3,7 @@
 
   <div class="flex justify-end mb-4">
     <button (click)="openCreateModal()" class="px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg shadow transition">
-      + Create New Event
+      + Create new event
     </button>
   </div>
 
@@ -46,12 +46,10 @@
         </p>
       </div>
     }
-
-
-
     </div>
   </div>
 
+  <!-- Edit Event -->
   @if (isEditModalOpen && selectedEvent) {
     <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-lg w-full max-w-md space-y-4">
@@ -81,6 +79,7 @@
   }
 
 
+    <!-- Delete Event -->
     @if (isDeleteModalOpen && eventToDelete) {
 
       <div class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
@@ -100,8 +99,8 @@
       </div>
     }
 
+    <!-- Create Event -->
     @if (isCreateModalOpen) {
-
       <div class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
         <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-xl w-full max-w-md text-white">
           <h2 class="text-xl font-bold mb-4 text-center">Create New Event</h2>
