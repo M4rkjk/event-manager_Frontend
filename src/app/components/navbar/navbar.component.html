@@ -15,8 +15,8 @@
     <!-- Középen: Welcome -->
     <div class="text-center">
       @if (userName != '') {
-        <span class="text-lg text-green-400">
-          Welcome, <span class="font-semibold">{{ userName }}!</span>
+        <span class="text-lg text-white-400">
+          Welcome, <span class="font-semibold text-green-400">{{ userName }}!</span>
         </span>
       }
 
@@ -37,7 +37,7 @@
       }
     </div>
 
-    Mobilmenü ikon
+    <!-- Mobilmenü ikon -->
     <div class="md:hidden flex justify-end">
       <button (click)="isMobileMenuOpen = !isMobileMenuOpen">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
