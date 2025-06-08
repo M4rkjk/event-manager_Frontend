@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import { EventModel } from '../../models/event.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-event-list',
@@ -30,14 +31,14 @@ export class EventListComponent implements OnInit {
     description: '',
   };
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private eventService: EventService) {}
 
   ngOnInit(): void {
     this.refreshEvents();
   }
 
   refreshEvents(): void {
-    this.dataService.getEvents().subscribe({
+    this.eventService.getEvents().subscribe({
       next: (data) => {
         this.events = data;
       },
@@ -61,7 +62,7 @@ export class EventListComponent implements OnInit {
   confirmDelete() {
     if (!this.eventToDelete) return;
 
-    this.dataService.deleteEvent(this.eventToDelete.id).subscribe({
+    this.eventService.deleteEvent(this.eventToDelete.id).subscribe({
       next: () => {
         this.refreshEvents();
         this.closeDeleteModal();
@@ -90,7 +91,7 @@ export class EventListComponent implements OnInit {
   saveChanges() {
     if (!this.selectedEvent) return;
 
-    this.dataService.updateEvent(this.selectedEvent).subscribe({
+    this.eventService.updateEvent(this.selectedEvent).subscribe({
       next: () => {
         this.closeEditModal();
         this.refreshEvents();
@@ -111,7 +112,7 @@ export class EventListComponent implements OnInit {
   }
 
   createEvent() {
-    this.dataService.createEvent(this.newEvent).subscribe({
+    this.eventService.createEvent(this.newEvent).subscribe({
       next: () => {
         this.refreshEvents();
         this.closeCreateModal();
