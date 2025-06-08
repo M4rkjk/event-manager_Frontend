@@ -22,6 +22,8 @@ export class LoginComponent {
     private router: Router
   ) {}
 
+
+
   login() {
     this.errorMessage = '';
 
@@ -34,6 +36,10 @@ export class LoginComponent {
       next: (response) => {
         this.authService.setToken(response.token);
         this.router.navigate(['/event-list']);
+
+        this.dataService.getCurrentUser().subscribe({
+          next: (user) => this.authService.setCurrentUser(user),
+        });
       },
       error: (err) => {
         if (err.status === 401) {

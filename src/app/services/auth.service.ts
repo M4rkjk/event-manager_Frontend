@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'token';
+  public currentUser = new BehaviorSubject<UserModel | null>(null);
 
   constructor() {}
 
@@ -22,5 +25,10 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    this.currentUser.next(null)
+  }
+
+  setCurrentUser(user: UserModel) {
+    this.currentUser.next(user);
   }
 }
