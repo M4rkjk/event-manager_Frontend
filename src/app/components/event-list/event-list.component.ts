@@ -12,15 +12,25 @@ import { FormsModule } from '@angular/forms';
 })
 export class EventListComponent implements OnInit {
   events: EventModel[] = [];
+  errorMessage = '';
+
+  //Edit
   isEditModalOpen = false;
   selectedEvent: EventModel | null = null;
 
+  //Delete
   isDeleteModalOpen = false;
   eventToDelete: EventModel | null = null;
 
-  errorMessage = '';
+  //Create
+  isCreateModalOpen = false;
+  newEvent = {
+    title: '',
+    occurs_at: '',
+    description: '',
+  };
 
-  constructor(private dataService: DataService,) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.refreshEvents();
@@ -68,9 +78,13 @@ export class EventListComponent implements OnInit {
     this.eventToDelete = null;
   }
 
-  closeModal() {
+  closeEditModal() {
     this.isEditModalOpen = false;
     this.selectedEvent = null;
+  }
+
+  closeCreateModal() {
+    this.isCreateModalOpen = false;
   }
 
   saveChanges() {
@@ -78,7 +92,7 @@ export class EventListComponent implements OnInit {
 
     this.dataService.updateEvent(this.selectedEvent).subscribe({
       next: () => {
-        this.closeModal();
+        this.closeEditModal();
         this.refreshEvents();
       },
       error: (err) => {
@@ -86,4 +100,24 @@ export class EventListComponent implements OnInit {
       },
     });
   }
-}
+
+  openCreateModal() {
+    this.newEvent = {
+      title: '',
+      occurs_at: '',
+      description: '',
+    };
+    this.isCreateModalOpen = true;
+  }
+
+  createEvent() {
+    this.dataService.createEvent(this.newEvent).subscribe({
+      next: () => {
+        this.refreshEvents();
+        this.closeCreateModal();
+      },
+      error: (err) => {
+        console.error('Hiba esemény létrehozásakor:', err);
+      }
+    });
+}}

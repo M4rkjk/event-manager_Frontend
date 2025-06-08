@@ -64,4 +64,12 @@ export class DataService {
       },
     });
   }
+
+  createEvent(eventData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/events`, eventData, {
+      headers: {
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      },
+    });
+  }
 }

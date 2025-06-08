@@ -16,7 +16,6 @@
         <span class="text-sm text-gray-400">Welcome, {{ userName }}</span>
       }
       <a routerLink="/event-list" class="hover:text-green-400 transition">Events</a>
-      <a routerLink="/helpdesk" class="hover:text-green-400 transition">Create new event</a>
       <button (click)="logout()" class="bg-green-600 hover:bg-green-500 text-sm px-4 py-2 rounded shadow">
         Logout
       </button>
@@ -36,7 +35,6 @@
    @if (isMobileMenuOpen) {
      <div  class="md:hidden px-4 pb-4 space-y-2">
        <a routerLink="/event-list" class="block hover:text-green-400">Events</a>
-       <a routerLink="/helpdesk" class="block hover:text-green-400">Create new event</a>
        <button (click)="logout()" class="w-full bg-green-600 hover:bg-green-500 px-4 py-2 rounded text-left">
          Logout
         </button>

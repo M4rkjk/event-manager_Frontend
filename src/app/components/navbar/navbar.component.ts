@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent implements OnInit {
   userName = '';
   isMobileMenuOpen = false;
+
 
   constructor(private dataService: DataService, private router: Router, private authService: AuthService) {}
 

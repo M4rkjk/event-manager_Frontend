@@ -1,6 +1,12 @@
 <div class="min-h-screen bg-[#1f1f1f] text-gray-100 p-8">
   <h1 class="text-3xl font-bold mb-6 text-center">My Events</h1>
 
+  <div class="flex justify-end mb-4">
+    <button (click)="openCreateModal()" class="px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg shadow transition">
+      + Create New Event
+    </button>
+  </div>
+
   @if (errorMessage) {
     <div class="mb-4 p-4 bg-red-500/20 text-red-400 border border-red-600 rounded">
       {{ errorMessage }}
@@ -67,7 +73,7 @@
         </div>
 
         <div class="flex justify-end space-x-3 mt-4">
-          <button (click)="closeModal()" class="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500 text-sm">Cancel</button>
+          <button (click)="closeEditModal()" class="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500 text-sm">Cancel</button>
           <button (click)="saveChanges()" class="px-4 py-2 rounded bg-green-600 hover:bg-green-500 text-white text-sm">Save</button>
         </div>
       </div>
@@ -93,4 +99,34 @@
         </div>
       </div>
     }
+
+    @if (isCreateModalOpen) {
+
+      <div class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+        <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-xl w-full max-w-md text-white">
+          <h2 class="text-xl font-bold mb-4 text-center">Create New Event</h2>
+
+          <form class="space-y-4" (ngSubmit)="createEvent()" #eventForm="ngForm">
+            <input [(ngModel)]="newEvent.title" name="title" required placeholder="Event Title"
+            class="w-full p-2 rounded bg-[#1f1f1f] border border-green-600 focus:outline-none" />
+
+            <input [(ngModel)]="newEvent.occurs_at" name="occurs_at" type="datetime-local" required
+            class="w-full p-2 rounded bg-[#1f1f1f] border border-green-600 focus:outline-none" />
+
+            <textarea [(ngModel)]="newEvent.description" name="description" placeholder="Description (optional)"
+            rows="3" class="w-full p-2 rounded bg-[#1f1f1f] border border-green-600 focus:outline-none"></textarea>
+
+            <div class="flex justify-end gap-3">
+              <button type="button" (click)="closeCreateModal()" class="px-4 py-2 bg-gray-600 rounded hover:bg-gray-500">
+                Cancel
+              </button>
+              <button type="submit" class="px-4 py-2 bg-green-600 rounded hover:bg-green-500 text-white"
+              [disabled]="!eventForm.form.valid">
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
 
