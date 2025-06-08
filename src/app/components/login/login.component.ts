@@ -22,8 +22,6 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-
-
   login() {
     this.errorMessage = '';
 
@@ -35,10 +33,16 @@ export class LoginComponent {
     this.dataService.login(this.email, this.password).subscribe({
       next: (response) => {
         this.authService.setToken(response.token);
-        this.router.navigate(['/event-list']);
 
         this.dataService.getCurrentUser().subscribe({
-          next: (user) => this.authService.setCurrentUser(user),
+          next: (user) => {
+            this.authService.setCurrentUser(user);
+            this.router.navigate(['/event-list']);
+          },
+          error: () => {
+            this.errorMessage =
+              'Login succeeded, but failed to fetch user data.';
+          },
         });
       },
       error: (err) => {
