@@ -1,0 +1,45 @@
+<nav class="bg-[#1f1f1f] text-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+
+    <div class="flex items-center space-x-2">
+      <div class="bg-green-600 w-9 h-9 flex items-center justify-center rounded-full shadow">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
+        </svg>
+      </div>
+      <span class="text-xl font-bold tracking-wide">Event Manager</span>
+    </div>
+
+    <div class="space-x-6 hidden md:flex items-center">
+      @if (userName != "") {
+        <span class="text-sm text-gray-400">Welcome, {{ userName }}</span>
+      }
+      <a routerLink="/event-list" class="hover:text-green-400 transition">Events</a>
+      <a routerLink="/helpdesk" class="hover:text-green-400 transition">Create new event</a>
+      <button (click)="logout()" class="bg-green-600 hover:bg-green-500 text-sm px-4 py-2 rounded shadow">
+        Logout
+      </button>
+    </div>
+
+    <div class="md:hidden">
+      <button (click)="isMobileMenuOpen = !isMobileMenuOpen">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+   @if (isMobileMenuOpen) {
+     <div  class="md:hidden px-4 pb-4 space-y-2">
+       <a routerLink="/event-list" class="block hover:text-green-400">Events</a>
+       <a routerLink="/helpdesk" class="block hover:text-green-400">Helpdesk</a>
+       <button (click)="logout()" class="w-full bg-green-600 hover:bg-green-500 px-4 py-2 rounded text-left">
+         Logout
+        </button>
+      </div>
+    }
+</nav>

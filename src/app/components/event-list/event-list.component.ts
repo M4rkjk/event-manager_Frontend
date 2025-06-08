@@ -3,7 +3,6 @@ import { DataService } from '../../services/data.service';
 import { EventModel } from '../../models/event.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
@@ -21,7 +20,7 @@ export class EventListComponent implements OnInit {
 
   errorMessage = '';
 
-  constructor(private dataService: DataService, router: ActivatedRoute) {}
+  constructor(private dataService: DataService,) {}
 
   ngOnInit(): void {
     this.refreshEvents();
