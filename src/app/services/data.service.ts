@@ -28,7 +28,7 @@ export class DataService {
       }
     );
   }
-  
+
   getCurrentUser(): Observable<UserModel> {
     return this.http.get<UserModel>(`${this.apiUrl}/me`, {
       headers: {
@@ -37,4 +37,9 @@ export class DataService {
     });
   }
 
+  sendHelpdeskMessage(message: string): Observable<{ answer: string }> {
+    return this.http.post<{ answer: string }>(`${this.apiUrl}/helpdesk`, {
+      message,
+    });
+  }
 }

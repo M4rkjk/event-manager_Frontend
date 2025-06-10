@@ -1,0 +1,45 @@
+<div class="fixed bottom-6 left-6 z-50">
+  <button
+    (click)="toggleChat()"
+    class="w-14 h-14 rounded-full bg-green-600 hover:bg-green-500 text-white flex items-center justify-center shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4-.83L3 20l1.57-3.14A7.973 7.973 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+  </button>
+
+  @if (isChatOpen) {
+
+
+  <div class="mt-4 w-80 max-h-96 bg-[#2a2a2a] text-white rounded-xl shadow-xl flex flex-col overflow-hidden">
+    <div class="p-3 border-b border-green-600 flex justify-between items-center">
+      <span class="font-semibold">Helpdesk</span>
+      <button (click)="toggleChat()" class="text-gray-400 hover:text-white">&times;</button>
+    </div>
+
+    <div class="flex-1 p-3 overflow-y-auto space-y-2 max-h-72">
+      @for (message of chatMessages; track $index) {
+        <div>
+          @if (message.sender === 'user') {
+            <div class="text-right">
+              <span class="inline-block bg-green-600 px-3 py-1 rounded-lg">{{ message.text }}</span>
+            </div>
+          }
+          @if (message.sender === 'bot') {
+            <div>
+              <span class="inline-block bg-[#1f1f1f] px-3 py-1 rounded-lg">{{ message.text }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <form (ngSubmit)="sendChat()" class="p-3 border-t border-green-600 flex gap-2">
+      <input [(ngModel)]="chatInput" name="chatInput" required
+             class="flex-1 rounded-lg bg-[#1f1f1f] px-3 py-1 focus:outline-none border border-green-500 text-white"
+             placeholder="Ask something...">
+      <button type="submit" class="bg-green-600 px-4 py-1 rounded hover:bg-green-500">Send</button>
+    </form>
+  </div>
+}
+</div>
+
