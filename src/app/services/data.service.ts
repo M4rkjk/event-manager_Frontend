@@ -43,7 +43,16 @@ export class DataService {
     });
   }
 
-  resetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/reset-password`, { email });
+  resetPasswordLink(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password-link`, { email });
+  }
+
+  resetPassword(email: string,token: string, newPassword: string, confirmPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, {
+      email,
+      token,
+      new_password: newPassword,
+      new_password_confirmation: confirmPassword,
+    });
   }
 }

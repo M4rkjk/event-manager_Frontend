@@ -24,7 +24,7 @@ export class PasswordRestoreComponent {
       return;
     }
 
-    this.dataService.resetPassword(this.email).subscribe({
+    this.dataService.resetPasswordLink(this.email).subscribe({
       next: (res) => {
         this.message = res.message || 'Password reset link sent.';
       },
